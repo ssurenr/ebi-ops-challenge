@@ -32,4 +32,4 @@
 
 
 ## Architecture
-![Architecture Diagram](architecture.png =256x)
+![Architecture Diagram](architecture.png)
