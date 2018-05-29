@@ -12,7 +12,7 @@
     ```
 3. Start rsyslog agent in the web container
     ```bash
-    docker exec -it ebi-ops-challenge_web_1 /etc/init.d/rsyslog start
+    docker exec -it web /etc/init.d/rsyslog start
     ```
 4. Generate some traffic.
     ```bash
@@ -37,5 +37,5 @@
 ## Clean Up
 ```bash
 docker-compose down
-docker volume rm ebi-ops-challenge_db_data
+docker volume rm dbvolume
 ```

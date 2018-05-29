@@ -1,9 +1,10 @@
 ---
-version: "3.1"
+version: "3.4"
 
 services:
 
   web:
+    container_name: web
     image: "ssurenr/nginx_syslog"
     ports:
       - "8080:80"
@@ -12,6 +13,7 @@ services:
       - ./nginx/rsyslog.conf:/etc/rsyslog.conf:ro
 
   syslog-server:
+    container_name: syslog-server
     image: jumanjiman/rsyslog
     ports:
       - "514:514"
@@ -21,18 +23,20 @@ services:
       - db
 
   db:
-   image: mysql:5.7
-   ports:
-     - "3306:3306"
-   volumes:
-     - db_data:/var/lib/mysql
-     - ./db/rsyslog_tables.sql:/docker-entrypoint-initdb.d/rsyslog_tables.sql:ro
-   restart: always
-   environment:
-     MYSQL_ROOT_PASSWORD: example
-     MYSQL_DATABASE: rsyslog
-     MYSQL_USER: rsyslog
-     MYSQL_PASSWORD: rsyslog
+    container_name: db
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/rsyslog_tables.sql:/docker-entrypoint-initdb.d/rsyslog_tables.sql:ro
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: rsyslog
+      MYSQL_USER: rsyslog
+      MYSQL_PASSWORD: rsyslog
 
 volumes:
   db_data:
+    name: dbvolume
